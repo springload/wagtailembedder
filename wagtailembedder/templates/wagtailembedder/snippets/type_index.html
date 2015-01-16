@@ -1,0 +1,21 @@
+{% load i18n %}
+{# TODO: translations for strings #}
+{% include "wagtailadmin/shared/header.html" with title=snippet_type_name_plural|capfirst subtitle=subtitle icon="snippet" %}
+
+<div class="nice-padding">
+    <ul class="listing">
+        {% if items %}
+            {% for snippet in items %}
+                <li>
+                    <div class="row row-flush title snippet-list">
+                        <h2><a class="snippet-choice" href="{% url 'wagtailembedder_choose_snippet' snippet.id content_type.app_label content_type.model %}">{{ snippet }}</a></h2>
+                    </div>
+                </li>
+            {% endfor %}
+        {% else %}
+            <li>
+                <p>No {{ snippet_type_name_plural }} have been created. Why not <a href="{{ wagtailsnippets_create_url }}">add one first?</a>?</p>
+            </li>
+        {% endif %}
+    </ul>
+</div>
