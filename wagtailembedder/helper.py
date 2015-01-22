@@ -35,5 +35,8 @@ class SnippetEmbedHandler(object):
 
 
 def add_embed_handler():
+    """
+    Add our own SnippetEmbedHandler into the wagtailcore EMBED_HANDLERS var
+    """
     EMBED_HANDLERS['snippet'] = SnippetEmbedHandler
     return True

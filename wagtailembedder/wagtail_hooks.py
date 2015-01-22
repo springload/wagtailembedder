@@ -18,7 +18,7 @@ def register_admin_urls():
 @hooks.register('insert_editor_js')
 def editor_js():
     """
-    Add extra JS files to the admin
+    Add extra JS files to the admin to register the plugin and set the reversed URL in JS vars
     """
     js_files = [
         'wagtailembedder/js/hallo-embedder.js',
@@ -38,4 +38,7 @@ def editor_js():
 
 @hooks.register('before_serve_page')
 def add_handler(page, request, serve_args, serve_kwargs):
+    """
+    Call add_embed_handler() to set a custom handler for embedded snippets
+    """
     add_embed_handler()
