@@ -35,7 +35,7 @@ def index_objects(request, content_type_app_name, content_type_model_name):
     snippet_types = get_snippet_content_types()
     for content_type in snippet_types:
         name = get_snippet_type_name(content_type)[0]
-        if name.lower() == content_type_model_name:
+        if name.lower().replace(" ", "") == content_type_model_name:
             model = content_type.model_class()
             items = model.objects.all()
             snippet_type_name, snippet_type_name_plural = get_snippet_type_name(content_type)
