@@ -29,7 +29,7 @@ install_requires = [
 setup(
     name='wagtailembedder',
     version=__version__,
-    description='Snippets embedder for Wagtail richtext fields.',
+    description='Snippets embedder for Wagtail RichTextField.',
     author='Jordi J. Tablada',
     author_email='jordi@springload.co.nz',
     url='https://github.com/springload/wagtailembedder/',
