@@ -1,7 +1,7 @@
 wagtailembedder
 ==================
 
-Format: ![Wagtailembedder scnreenshot](http://i.imgur.com/qDPKz7r.png)
+![Wagtailembedder scnreenshot](http://i.imgur.com/qDPKz7r.png)
 
 Snippets embedder for Wagtail RichTextField.
 
