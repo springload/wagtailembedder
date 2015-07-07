@@ -7,7 +7,7 @@ Snippets embedder for Wagtail RichTextField.
 
 # Quickstart
 
-``` $ pip install -e git+git@github.com:springload/wagtailembedder#egg=wagtailembedder```
+``` $ pip install wagtailembedder```
 
 add wagtailembedder to your settings.py in the INSTALLED_APPS section:
 

@@ -1,2 +1,2 @@
-include README
+include README.md
 recursive-include wagtailembedder *.py *.html *.js *.css
