@@ -1,10 +1,13 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.template.loader import render_to_string
+
 from wagtail.wagtailsnippets.views.snippets import get_content_type_from_url_params
-# from wagtail.wagtailembedder.embeds import get_embed
 
 
 def embed_to_frontend_html(id, content_type_app_name, content_type_model_name):
+    """
+    Provides the Snippet representation through the appropiate template
+    """
     try:
         content_type = get_content_type_from_url_params(content_type_app_name, content_type_model_name)
         model = content_type.model_class()
@@ -22,6 +25,9 @@ def embed_to_frontend_html(id, content_type_app_name, content_type_model_name):
 
 
 def embed_to_editor_html(id, content_type_app_name, content_type_model_name):
+    """
+    Provides the Snippet representation to display in the RichTextEditor
+    """
     try:
         content_type = get_content_type_from_url_params(content_type_app_name, content_type_model_name)
         model = content_type.model_class()

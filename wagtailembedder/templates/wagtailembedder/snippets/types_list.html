@@ -10,11 +10,11 @@
 
 <div class="nice-padding">
     <ul class="listing">
-            {% for name, description, content_type in snippet_types %}
+            {% for app_label, name, description in snippet_types %}
                 <li>
                     <div class="row row-flush title snippet-list">
                         <h2>
-                            <a href="{% url 'wagtailembedder_class_chosen' content_type.app_label content_type.model %}" class="snippet-embedder col6">
+                            <a href="{% url 'wagtailembedder_class_chosen' app_label name %}" class="snippet-embedder col6">
                                 {{ name|capfirst }} 
                             </a>
                         </h2>

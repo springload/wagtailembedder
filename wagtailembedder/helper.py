@@ -1,4 +1,5 @@
 from wagtail.wagtailcore.rich_text import EMBED_HANDLERS
+
 from wagtailembedder.format import embed_to_editor_html, embed_to_frontend_html
 
 

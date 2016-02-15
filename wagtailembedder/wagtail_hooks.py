@@ -2,7 +2,9 @@ from django.conf.urls import include, url
 from django.conf import settings
 from django.utils.html import format_html, format_html_join
 from django.core.urlresolvers import reverse
+
 from wagtail.wagtailcore import hooks
+
 from wagtailembedder import urls
 from wagtailembedder.helper import add_embed_handler
 

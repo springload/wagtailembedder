@@ -7,18 +7,25 @@ from wagtail.wagtailadmin.modal_workflow import render_modal_workflow
 
 from wagtail.wagtailsnippets.models import get_snippet_content_types
 from wagtail.wagtailsnippets.permissions import user_can_edit_snippet_type
-from wagtail.wagtailsnippets.views.snippets import get_snippet_type_description, get_snippet_type_name
 from wagtail.wagtailsnippets.views.snippets import get_content_type_from_url_params
+from wagtail.wagtailsnippets.models import get_snippet_models
+
 from wagtailembedder.format import embed_to_editor_html
 
 
 @permission_required('wagtailadmin.access_admin')
 def index(request):
-    snippet_types = [(
-        get_snippet_type_name(content_type)[1],
-        get_snippet_type_description(content_type),
-        content_type)
-        for content_type in get_snippet_content_types()
+    """
+    Fetches all human-readabe names of all snippet classes and presents them
+    in a list.
+    """
+    snippet_types = [
+        (
+            content_type._meta.app_label,
+            content_type._meta.model.__name__,
+            content_type._meta.description,
+        )
+        for content_type in get_snippet_models()
         if user_can_edit_snippet_type(request.user, content_type)
     ]
     return render_modal_workflow(
@@ -32,13 +39,16 @@ def index(request):
 
 
 def index_objects(request, content_type_app_name, content_type_model_name):
+    """
+    Fetch objects of related model of the given ContentType and call the template
+    to properly display them in a list.
+    """
     snippet_types = get_snippet_content_types()
     for content_type in snippet_types:
-        name = get_snippet_type_name(content_type)[0]
-        if name.lower().replace(" ", "") == content_type_model_name:
-            model = content_type.model_class()
-            items = model.objects.all()
-            snippet_type_name, snippet_type_name_plural = get_snippet_type_name(content_type)
+        if content_type.model == content_type_model_name.lower():
+            items = content_type.model_class().objects.all()
+            snippet_type_name = content_type.model_class()._meta.verbose_name
+            snippet_type_name_plural = content_type.model_class()._meta.verbose_name_plural
 
             return render_modal_workflow(
                 request,
@@ -56,6 +66,9 @@ def index_objects(request, content_type_app_name, content_type_model_name):
 
 
 def choose_snippet(request, id, content_type_app_name, content_type_model_name):
+    """
+    Choose snippet and display its representation in the Hallo.js richtext field.
+    """
     content_type = get_content_type_from_url_params(content_type_app_name, content_type_model_name)
     if not user_can_edit_snippet_type(request.user, content_type):
         raise PermissionDenied
