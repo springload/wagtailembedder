@@ -21,6 +21,7 @@ def index(request):
         (
             content_type._meta.app_label,
             content_type._meta.model.__name__,
+            content_type._meta.verbose_name,
             content_type._meta.description,
         )
         for content_type in get_snippet_models()
