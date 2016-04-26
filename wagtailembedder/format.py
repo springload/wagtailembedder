@@ -1,7 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.template.loader import render_to_string
 
-from wagtail.wagtailsnippets.views.snippets import get_snippet_model_from_url_params
+from wagtailembedder.views.snippets import get_snippet_model_from_url_params
 
 
 def embed_to_frontend_html(id, content_type_app_name, content_type_model_name):

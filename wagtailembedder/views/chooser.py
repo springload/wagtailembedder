@@ -5,10 +5,10 @@ from django.core.exceptions import PermissionDenied
 from wagtail.wagtailadmin.modal_workflow import render_modal_workflow
 
 from wagtail.wagtailsnippets.permissions import user_can_edit_snippet_type
-from wagtail.wagtailsnippets.views.snippets import get_snippet_model_from_url_params
 from wagtail.wagtailsnippets.models import get_snippet_models
 
 from wagtailembedder.format import embed_to_editor_html
+from wagtailembedder.views.snippets import get_snippet_model_from_url_params
 
 
 @permission_required('wagtailadmin.access_admin')
