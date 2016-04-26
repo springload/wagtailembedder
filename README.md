@@ -7,22 +7,43 @@ Snippets embedder for Wagtail RichTextField.
 
 # Quickstart
 
-``` $ pip install wagtailembedder```
+Install the package with ``` $ pip install wagtailembedder```
 
-add wagtailembedder to your settings.py in the INSTALLED_APPS section:
+Add `wagtailembedder` to your `settings.py` in the `INSTALLED_APPS` section:
 
-```
-...
+```python
+INSTALLED_APPS = [
+    ...
     'modelcluster',
     'wagtailembedder',
     'core',
-...
+    ...
+]
 ```
 
-For each of your models registered as a wagtail.wagtailsnippets create an html file to render the template inside a RichText field.
-Example: if we have a ```SocialMediaLink``` snippet in our ```core``` app we need to create a template in ```core/templates/snippets/social_media_link.html```. The variable containing the snippet instance in the template is ```snippet```.
+For each models registered as a wagtail.wagtailsnippets create an html file to render the template inside a RichText field.
+
+ * Templates names will match snippets models names replacing capital letters with underscores, Wagtail style.  
+   For the ```SocialMediaLink``` snippet in the ```core``` app, it will look for the following template ```core/templates/snippets/social_media_link.html```.
+ * The variable containing the snippet instance in the template is ```snippet```.
 
 If no template is defined then an exception will be raised in the frontend when rendering a RichTextField with the embedded snippet in it. Make sure you write some templates for your snippets before start to embedding them.
 
-Templates names will match snippets models names replacing capital letters with underscores, Wagtail style.
+# Options
 
+If the snippet meta has a description field, it will show up next to the snippet name in the admin interface.
+
+```python
+from django.db import models
+import django.db.models.options as options
+
+options.DEFAULT_NAMES = options.DEFAULT_NAMES + ('description',)
+
+
+@register_snippet
+class MySnippet(models.Model):
+    # fields definition
+
+    class Meta:
+        description = "My Snippet Description"
+```
