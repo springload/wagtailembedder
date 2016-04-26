@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='wagtailembedder',
-    version='0.1.5',
+    version='1.0',
     packages=['wagtailembedder'],
     include_package_data=True,
     license='BSD License',
