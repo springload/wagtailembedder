@@ -16,9 +16,10 @@ def embed_to_frontend_html(id, content_type_app_name, content_type_model_name):
 
     if instance is not None:
         # Render template
-        return render_to_string(content_type_app_name + '/snippets/' + content_type_model_name + '.html', {
-            'snippet': instance,
-        })
+        template_name = '{app}/snippets/{model}.html'.format(
+            app=content_type_app_name, model=content_type_model_name.lower())
+        context = {'snippet': instance}
+        return render_to_string(template_name, context)
     else:
         return ''
 
