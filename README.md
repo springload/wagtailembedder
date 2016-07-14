@@ -24,7 +24,7 @@ INSTALLED_APPS = [
 For each models registered as a wagtail.wagtailsnippets create an html file to render the template inside a RichText field.
 
  * Templates names will match snippets models names replacing capital letters with underscores, Wagtail style.  
-   For the ```SocialMediaLink``` snippet in the ```core``` app, it will look for the following template ```core/templates/snippets/social_media_link.html```.
+   For the ```SocialMediaLink``` snippet in the ```core``` app, it will look for the following template ```core/templates/snippets/socialmedialink.html```.
  * The variable containing the snippet instance in the template is ```snippet```.
 
 If no template is defined then an exception will be raised in the frontend when rendering a RichTextField with the embedded snippet in it. Make sure you write some templates for your snippets before start to embedding them.
