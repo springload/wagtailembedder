@@ -1,13 +1,18 @@
-wagtailembedder
-==================
+# wagtailembedder [![PyPI](https://img.shields.io/pypi/v/wagtailembedder.svg)](https://pypi.python.org/pypi/wagtailembedder)
+
+> Snippets embedder for Wagtail RichTextField.
+
+*Check out [Awesome Wagtail](https://github.com/springload/awesome-wagtail) for more awesome packages and resources from the Wagtail community.*
 
 ![Wagtailembedder scnreenshot](http://i.imgur.com/qDPKz7r.png)
 
-Snippets embedder for Wagtail RichTextField.
+## Quickstart
 
-# Quickstart
+Install the package with 
 
-Install the package with ``` $ pip install wagtailembedder```
+```sh
+pip install wagtailembedder
+```
 
 Add `wagtailembedder` to your `settings.py` in the `INSTALLED_APPS` section:
 
