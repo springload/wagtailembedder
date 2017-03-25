@@ -4,7 +4,7 @@
 
 *Check out [Awesome Wagtail](https://github.com/springload/awesome-wagtail) for more awesome packages and resources from the Wagtail community.*
 
-![Wagtailembedder scnreenshot](http://i.imgur.com/qDPKz7r.png)
+![Wagtailembedder scnreenshot](./screenshot.png)
 
 ## Quickstart
 
