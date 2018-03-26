@@ -1,12 +1,19 @@
 from django.conf.urls import include, url
 from django.conf import settings
 from django.utils.html import format_html, format_html_join
-from django.core.urlresolvers import reverse
-
-from wagtail.wagtailcore import hooks
 
 from wagtailembedder import urls
 from wagtailembedder.helper import add_embed_handler
+
+try:
+    from django.urls import reverse
+except ImportError:  # Django < 2.0
+    from django.core.urlresolvers import reverse
+
+try:
+    from wagtail.core import hooks
+except ImportError:  # Wagtail < 2.0
+    from wagtail.wagtailcore import hooks
 
 
 @hooks.register('register_admin_urls')

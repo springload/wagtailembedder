@@ -1,6 +1,9 @@
-from wagtail.wagtailcore.rich_text import EMBED_HANDLERS
+import wagtail
 
 from wagtailembedder.format import embed_to_editor_html, embed_to_frontend_html
+
+if wagtail.VERSION <= (2,0):
+    from wagtail.wagtailcore.rich_text import EMBED_HANDLERS
 
 
 class SnippetEmbedHandler(object):
@@ -39,5 +42,8 @@ def add_embed_handler():
     """
     Add our own SnippetEmbedHandler into the wagtailcore EMBED_HANDLERS var
     """
-    EMBED_HANDLERS['snippet'] = SnippetEmbedHandler
+
+    if wagtail.VERSION <= (2,0):
+        EMBED_HANDLERS['snippet'] = SnippetEmbedHandler
+
     return True

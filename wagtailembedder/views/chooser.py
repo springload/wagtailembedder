@@ -2,13 +2,18 @@ from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.exceptions import PermissionDenied
 
-from wagtail.wagtailadmin.modal_workflow import render_modal_workflow
-
-from wagtail.wagtailsnippets.permissions import user_can_edit_snippet_type
-from wagtail.wagtailsnippets.models import get_snippet_models
-
 from wagtailembedder.format import embed_to_editor_html
 from wagtailembedder.views.snippets import get_snippet_model_from_url_params
+
+try:
+    from wagtail.admin.modal_workflow import render_modal_workflow
+    from wagtail.snippets.models import get_snippet_models
+    from wagtail.snippets.permissions import user_can_edit_snippet_type
+except ImportError:  # Wagtail < 2.0
+    from wagtail.wagtailadmin.modal_workflow import render_modal_workflow
+    from wagtail.wagtailsnippets.models import get_snippet_models
+    from wagtail.wagtailsnippets.permissions import user_can_edit_snippet_type
+
 
 
 @permission_required('wagtailadmin.access_admin')

@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 # Package dependencies
 install_requires = [
-    'wagtail>=1.3,<2.0',
+    'wagtail>=1.3,<2.1',
 ]
 
 # Testing dependencies
