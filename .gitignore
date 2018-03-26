@@ -6,3 +6,5 @@
 *.pot
 build/
 dist/
+*.sqlite3
+tests/testapp/var/media/

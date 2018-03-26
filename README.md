@@ -8,7 +8,7 @@
 
 ## Quickstart
 
-Install the package with 
+Install the package with
 
 ```sh
 pip install wagtailembedder
@@ -28,7 +28,7 @@ INSTALLED_APPS = [
 
 For each models registered as a wagtail.wagtailsnippets create an html file to render the template inside a RichText field.
 
- * Templates names will match snippets models names replacing capital letters with underscores, Wagtail style.  
+ * Templates names will match snippets models names replacing capital letters with underscores, Wagtail style.
    For the ```SocialMediaLink``` snippet in the ```core``` app, it will look for the following template ```core/templates/snippets/socialmedialink.html```.
  * The variable containing the snippet instance in the template is ```snippet```.
 
@@ -52,3 +52,15 @@ class MySnippet(models.Model):
     class Meta:
         description = "My Snippet Description"
 ```
+
+## Development
+
+### Releases
+
+- Make a new branch for the release of the new version.
+- Update the [CHANGELOG](https://github.com/springload/wagtailembedder/CHANGELOG.md).
+- Update the version number in `setup.py`, following semver.
+- Make a PR and squash merge it.
+- Back on master with the PR merged, use `make publish` (confirm, and enter your password).
+- Finally, go to GitHub and create a release and a tag for the new version.
+- Done!
