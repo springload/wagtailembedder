@@ -2,6 +2,7 @@ from django.conf.urls import include, url
 from django.conf import settings
 from django.utils.html import format_html, format_html_join
 
+import wagtail
 from wagtailembedder import urls
 from wagtailembedder.helper import add_embed_handler
 
@@ -11,8 +12,10 @@ except ImportError:  # Django < 2.0
     from django.core.urlresolvers import reverse
 
 try:
+    from wagtail.admin.rich_text import HalloPlugin
     from wagtail.core import hooks
 except ImportError:  # Wagtail < 2.0
+    from wagtail.wagtailadmin.rich_text import HalloPlugin
     from wagtail.wagtailcore import hooks
 
 
@@ -29,15 +32,10 @@ def editor_js():
     """
     Add extra JS files to the admin to register the plugin and set the reversed URL in JS vars
     """
-    js_files = [
-        'wagtailembedder/js/hallo-embedder.js',
-    ]
-    js_includes = format_html_join(
-        '\n', '<script src="{0}{1}"></script>', ((settings.STATIC_URL, filename) for filename in js_files))
 
-    return js_includes + format_html("""
+    return format_html("""
             <script>
-                registerHalloPlugin('halloembedder');
+                /*registerHalloPlugin('halloembedder');*/
                 window.embedderChooserUrls = [];
                 window.embedderChooserUrls.embedderChooser = '{0}';
             </script>
@@ -45,23 +43,37 @@ def editor_js():
     )
 
 
-@hooks.register('insert_editor_css')
-def editor_css():
-    """
-    Add extra CSS files to the admin.
-    """
-    css_files = [
-        'wagtailembedder/css/admin.css',
-    ]
-    css_includes = format_html_join(
-        '\n', '<link rel="stylesheet" href="{0}{1}">', ((settings.STATIC_URL, filename) for filename in css_files))
+# @hooks.register('insert_editor_css')
+# def editor_css():
+#     """
+#     Add extra CSS files to the admin.
+#     """
+#     css_files = [
+#         'wagtailembedder/css/admin.css',
+#     ]
+#     css_includes = format_html_join(
+#         '\n', '<link rel="stylesheet" href="{0}{1}">', ((settings.STATIC_URL, filename) for filename in css_files))
 
-    return css_includes
+#     return css_includes
 
 
-@hooks.register('before_serve_page')
-def add_handler(page, request, serve_args, serve_kwargs):
-    """
-    Call add_embed_handler() to set a custom handler for embedded snippets
-    """
-    add_embed_handler()
+@hooks.register('register_rich_text_features')
+def register_snippet_feature(features):
+    # features.default_features.append('snippet')
+
+    features.register_editor_plugin(
+        'hallo',
+        'snippet',
+        HalloPlugin(
+            name='halloembedder',
+            js=['wagtailembedder/js/hallo-embedder.js'],
+            css=['wagtailembedder/css/admin.css'],
+        )
+    )
+
+# @hooks.register('before_serve_page')
+# def add_handler(page, request, serve_args, serve_kwargs):
+#     """
+#     Call add_embed_handler() to set a custom handler for embedded snippets
+#     """
+#     add_embed_handler()
