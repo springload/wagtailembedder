@@ -58,7 +58,7 @@ function placeCaretAtEnd(el) {
             lastSelection = widget.options.editable.getSelection();
             insertionPoint = $(lastSelection.endContainer).parentsUntil('.richtext').last();
             return ModalWorkflow({
-              url: window.embedderChooserUrls.embedderChooser,
+              url: widget.options.chooser,
               responses: {
                 snippetChosen: function(embedData) {
                   var elem = $(embedData).get(0);

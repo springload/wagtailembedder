@@ -25,7 +25,7 @@ class MySnippet(models.Model):
 
 
 class TestPage(Page):
-    body = RichTextField(blank=True)
+    body = RichTextField(blank=True, features=['snippet'])
 
     content_panels = Page.content_panels + [
         FieldPanel('body'),

@@ -3,6 +3,7 @@ from django.conf import settings
 from django.utils.html import format_html, format_html_join
 from django.core.urlresolvers import reverse
 
+from wagtail.wagtailadmin.rich_text import HalloPlugin
 from wagtail.wagtailcore import hooks
 
 from wagtailembedder import urls
@@ -17,40 +18,19 @@ def register_admin_urls():
     ]
 
 
-@hooks.register('insert_editor_js')
-def editor_js():
-    """
-    Add extra JS files to the admin to register the plugin and set the reversed URL in JS vars
-    """
-    js_files = [
-        'wagtailembedder/js/hallo-embedder.js',
-    ]
-    js_includes = format_html_join(
-        '\n', '<script src="{0}{1}"></script>', ((settings.STATIC_URL, filename) for filename in js_files))
-
-    return js_includes + format_html("""
-            <script>
-                registerHalloPlugin('halloembedder');
-                window.embedderChooserUrls = [];
-                window.embedderChooserUrls.embedderChooser = '{0}';
-            </script>
-        """, reverse('wagtailembedder_class_list')
+@hooks.register('register_rich_text_features')
+def register_snippet_feature(features):
+    features.register_editor_plugin(
+        'hallo',
+        'snippet',
+        HalloPlugin(
+            name='halloembedder',
+            options={'chooser': reverse('wagtailembedder_class_list')},
+            js=['wagtailembedder/js/hallo-embedder.js'],
+            css={'screen': ['wagtailembedder/css/admin.css']},
+            order=999,
+        )
     )
-
-
-@hooks.register('insert_editor_css')
-def editor_css():
-    """
-    Add extra CSS files to the admin.
-    """
-    css_files = [
-        'wagtailembedder/css/admin.css',
-    ]
-    css_includes = format_html_join(
-        '\n', '<link rel="stylesheet" href="{0}{1}">', ((settings.STATIC_URL, filename) for filename in css_files))
-
-    return css_includes
-
 
 @hooks.register('before_serve_page')
 def add_handler(page, request, serve_args, serve_kwargs):
