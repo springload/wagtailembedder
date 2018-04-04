@@ -6,13 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+...
+
+## [1.2] - 2018-04-04
+
 ### Added
 
 - Compatibility with Python 3.5 and 3.6
-
-### Fixed
-
-...
 
 ### Changed
 
@@ -73,7 +73,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 Initial Release
 
-[Unreleased]: https://github.com/springload/wagtailembedder/compare/1.1...HEAD
+[Unreleased]: https://github.com/springload/wagtailembedder/compare/1.2...HEAD
+[1.1]: https://github.com/springload/wagtailembedder/compare/1.1...1.2
 [1.1]: https://github.com/springload/wagtailembedder/compare/1.0...1.1
 [1.0]: https://github.com/springload/wagtailembedder/compare/0.1.5...1.0
 [0.1.5]: https://github.com/springload/wagtailembedder/compare/0.1.4...0.1.5
