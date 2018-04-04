@@ -7,12 +7,11 @@ from wagtail.wagtailadmin.rich_text import HalloPlugin
 from wagtail.wagtailcore import hooks
 
 from wagtailembedder import urls
-from wagtailembedder.helper import add_embed_handler
+from wagtailembedder.helper import SnippetEmbedHandler
 
 
 @hooks.register('register_admin_urls')
 def register_admin_urls():
-    add_embed_handler()
     return [
         url(r'^classembedder/', include(urls)),
     ]
@@ -32,9 +31,6 @@ def register_snippet_feature(features):
         )
     )
 
-@hooks.register('before_serve_page')
-def add_handler(page, request, serve_args, serve_kwargs):
-    """
-    Call add_embed_handler() to set a custom handler for embedded snippets
-    """
-    add_embed_handler()
+@hooks.register('register_rich_text_embed_handler')
+def register_snippet_embed_handler():
+    return 'snippet', SnippetEmbedHandler
