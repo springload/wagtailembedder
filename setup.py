@@ -22,7 +22,7 @@ documentation_extras = [
 
 setup(
     name='wagtailembedder',
-    version='1.1',
+    version='1.2',
     packages=['wagtailembedder'],
     include_package_data=True,
     license='MIT',
