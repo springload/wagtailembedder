@@ -12,14 +12,6 @@ install_requires = [
     'wagtail>=1.12,<2.0',
 ]
 
-# Testing dependencies
-testing_extras = [
-]
-
-# Documentation dependencies
-documentation_extras = [
-]
-
 setup(
     name='wagtailembedder',
     version='1.2',
@@ -48,8 +40,4 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
     install_requires=install_requires,
-    extras_require={
-        'testing': testing_extras,
-        'docs': documentation_extras
-    },
 )
