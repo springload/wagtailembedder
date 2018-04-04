@@ -17,10 +17,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - Now licensed under MIT
+- The snippet button isn't enabled by default anymore. Add `snippet` to the list of features of your `RichTextBlock`s and `RichTextField`s to show the button or use the `register_rich_text_features` to register it as a default feature with `features.default_features.append('snippet')`.
 
 ### Removed
 
 - Compatibility with Python 2.6, 3.2 and 3.3
+- Compatibility with Wagtail prior 1.12
 
 ## [1.1] - 2016-07-04
 

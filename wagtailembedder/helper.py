@@ -1,4 +1,4 @@
-from wagtail.wagtailcore.rich_text import EMBED_HANDLERS
+import wagtail
 
 from wagtailembedder.format import embed_to_editor_html, embed_to_frontend_html
 
@@ -33,11 +33,3 @@ class SnippetEmbedHandler(object):
             return embed_to_editor_html(attrs['id'], attrs['app-name'], attrs['content-type-name'])
         else:
             return embed_to_frontend_html(attrs['id'], attrs['app-name'], attrs['content-type-name'])
-
-
-def add_embed_handler():
-    """
-    Add our own SnippetEmbedHandler into the wagtailcore EMBED_HANDLERS var
-    """
-    EMBED_HANDLERS['snippet'] = SnippetEmbedHandler
-    return True
