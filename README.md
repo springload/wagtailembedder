@@ -26,7 +26,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-For each models registered as a wagtail.wagtailsnippets create an html file to render the template inside a RichText field.
+For each models registered as a wagtail.snippets create an html file to render the template inside a RichText field.
 
  * Templates names will match snippets models names replacing capital letters with underscores, Wagtail style.
    For the ```SocialMediaLink``` snippet in the ```core``` app, it will look for the following template ```core/templates/snippets/socialmedialink.html```.

@@ -1,10 +1,10 @@
 from django.conf.urls import include, url
 from django.conf import settings
 from django.utils.html import format_html, format_html_join
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
-from wagtail.wagtailadmin.rich_text import HalloPlugin
-from wagtail.wagtailcore import hooks
+from wagtail.admin.rich_text import HalloPlugin
+from wagtail.core import hooks
 
 from wagtailembedder import urls
 from wagtailembedder.helper import SnippetEmbedHandler

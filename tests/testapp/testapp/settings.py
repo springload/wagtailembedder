@@ -32,20 +32,20 @@ if wagtail.VERSION >= (2, 0):
     wagtail_richtext_widget = 'wagtail.admin.rich_text.HalloRichTextArea'
 else:
     wagtail_apps = [
-        'wagtail.wagtailforms',
-        'wagtail.wagtailsites',
-        'wagtail.wagtailusers',
-        'wagtail.wagtaildocs',
-        'wagtail.wagtailimages',
-        'wagtail.wagtailadmin',
-        'wagtail.wagtailcore',
-        'wagtail.wagtailembeds',
-        'wagtail.wagtailsnippets',
+        'wagtail.contrib.forms',
+        'wagtail.sites',
+        'wagtail.users',
+        'wagtail.documents',
+        'wagtail.images',
+        'wagtail.admin',
+        'wagtail.core',
+        'wagtail.embeds',
+        'wagtail.snippets',
     ]
     wagtail_middlewares = [
-        'wagtail.wagtailcore.middleware.SiteMiddleware',
+        'wagtail.core.middleware.SiteMiddleware',
     ]
-    wagtail_richtext_widget = 'wagtail.wagtailadmin.rich_text.HalloRichTextArea'
+    wagtail_richtext_widget = 'wagtail.admin.rich_text.HalloRichTextArea'
 
 INSTALLED_APPS = wagtail_apps + [
     'home',
