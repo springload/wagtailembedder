@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.exceptions import PermissionDenied
+from django.utils.html import escapejs
 
 from wagtail.admin.modal_workflow import render_modal_workflow
 
@@ -27,12 +28,15 @@ def index(request):
         for content_type in get_snippet_models()
         if user_can_edit_snippet_type(request.user, content_type)
     ]
+
     return render_modal_workflow(
         request,
         'wagtailembedder/snippets/types_list.html',
-        'wagtailembedder/snippets/types_list.js',
-        {
+        template_vars={
             'snippet_types': snippet_types,
+        },
+        json_data={
+            'step': 'types-list',
         }
     )
 
@@ -51,12 +55,14 @@ def index_objects(request, content_type_app_name, content_type_model_name):
     return render_modal_workflow(
         request,
         'wagtailembedder/snippets/type_index.html',
-        'wagtailembedder/snippets/type_index.js',
-        {
+        template_vars={
             'content_type': {'app_label': content_type_app_name, 'model': content_type_model_name},
             'snippet_type_name': snippet_type_name,
             'snippet_type_name_plural': snippet_type_name_plural,
             'items': items,
+        },
+        json_data={
+            'step': 'type-index',
         }
     )
 
@@ -75,14 +81,17 @@ def choose_snippet(request, id, content_type_app_name, content_type_model_name):
         return render_modal_workflow(
             request,
             None,
-            None,
-            {'error': 'Sorry, an error occurred. Contact support or try again later.'}
+            template_vars={
+                'error': 'Sorry, an error occurred. Contact support or try again later.'
+            }
         )
     embed_html = embed_to_editor_html(id, content_type_app_name, content_type_model_name)
 
     return render_modal_workflow(
         request,
         None,
-        'wagtailembedder/editor/snippet_chosen.js',
-        {'embed_html': embed_html}
+        json_data={
+            'step': 'choose_snippet',
+            'embed_html': embed_html,
+        }
     )

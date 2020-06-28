@@ -48,18 +48,40 @@ function placeCaretAtEnd(el) {
             return refreshedButton;
           }
         });
+        button.addClass('action-types-list')
         toolbar.append(button);
+
         return button.on("click", function(event) {
-          var enclosingLink, insertionPoint, lastSelection;
+          var enclosingLink, lastSelection;
 
           enclosingLink = getEnclosingEmbed();
           if (!enclosingLink) {
 
             lastSelection = widget.options.editable.getSelection();
             return ModalWorkflow({
-              url: widget.options.chooser,
+              url: widget.options.modalUrl,
+              onload: {
+                'types-list': function(modal) {
+                  $('div.snippet-list h2 a.snippet-embedder').click(function(event){
+                    event.preventDefault();
+                    modal.loadUrl(this.href);
+                    return false;
+                  });
+                },
+                'type-index': function(modal) {
+                  $('div.snippet-list h2 a.snippet-choice').click(function(event){
+                    event.preventDefault();
+                    modal.loadUrl(this.href);
+                    return false;
+                  });
+                },
+                'choose_snippet': function(modal, jsonData) {
+                  modal.respond('snippetChosen', jsonData['embed_html']);
+                  modal.close();
+                },
+              },
               responses: {
-                snippetChosen: function(embedData) {
+                'snippetChosen': function(embedData) {
                   var elem = $(embedData).get(0);
                   lastSelection.insertNode(elem);
                   if (elem.getAttribute('contenteditable') === 'false') {
