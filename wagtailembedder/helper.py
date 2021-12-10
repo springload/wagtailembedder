@@ -14,6 +14,7 @@ from draftjs_exporter.dom import DOM
 from wagtail.admin.rich_text.converters.contentstate_models import Entity
 from wagtail.admin.rich_text.converters.html_to_contentstate import AtomicBlockEntityElementHandler
 from wagtail.embeds import embeds
+from wagtail.embeds.rich_text.editor_html import MediaEmbedHandler
 from wagtail.embeds.exceptions import EmbedException
 
 
@@ -70,5 +71,6 @@ class HTMLEmbedSnippetConversion:
 
 
 HTMLEmbedSnippetConversionRule = [
+    editor_html.EmbedTypeRule('media', MediaEmbedHandler),
     editor_html.EmbedTypeRule('snippet', HTMLEmbedSnippetConversion)
 ]

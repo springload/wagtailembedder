@@ -9,12 +9,12 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 # Package dependencies
 install_requires = [
-    'wagtail>=2.5,<3.0',
+    'wagtail>=2.15.1,<3.0',
 ]
 
 setup(
     name='wagtailembedder',
-    version='1.2',
+    version='1.3',
     packages=['wagtailembedder'],
     include_package_data=True,
     license='MIT',
